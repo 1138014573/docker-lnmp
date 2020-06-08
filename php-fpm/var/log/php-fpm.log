@@ -1,0 +1,5 @@
+[03-Jun-2020 12:01:51] ERROR: No pool defined. at least one pool section must be specified in config file
+[03-Jun-2020 12:01:51] ERROR: failed to post process the configuration
+[03-Jun-2020 12:01:51] ERROR: FPM initialization failed
+[03-Jun-2020 12:02:19] NOTICE: fpm is running, pid 164
+[03-Jun-2020 12:02:19] NOTICE: ready to handle connections

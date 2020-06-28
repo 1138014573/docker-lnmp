@@ -1,9 +1,10 @@
 FROM centos:centos7
-MAINTAINER bigberg
+#MAINTAINER 镜像作者
+# MAINTAINER indifferent
 
 RUN yum -y install gcc gcc-c++ gd-devel libxml2 libxml2-devel libcurl-devel \
     openssl openssl-devel curl curl-devel libjpeg libjpeg-devel libpng  \
-    freestyle freestyle-devel pcre pcre-devel libxslt libxslt-devel bzip2 bzip2-devel
+    freestyle freestyle-devel pcre pcre-devel libxslt libxslt-devel bzip2 bzip2-devel m4 autoconf
 ADD  php-7.2.31.tar.gz /tmp/
 RUN cd /tmp/php-7.2.31 \
     && ./configure --prefix=/usr/local/php \
@@ -23,6 +24,23 @@ RUN cd /tmp/php-7.2.31 \
     && chmod a+x /etc/init.d/php-fpm \
     && groupadd -g 1001 www \
     && useradd -g 1001 -u 1001 www
-
+#安装redis扩展
+ADD  redis-5.2.2.tgz /tmp/
+# RUN cd /tmp/redis-5.2.2/
+# RUN /usr/local/php/bin/phpize
+# RUN ./configure --with-php-config=/usr/local/php/bin/php-config 
+# RUN make && make install
+#安装yaf扩展
+ADD  yaf-3.2.5.tgz /tmp/
+# RUN cd /tmp/yaf-3.2.5
+# RUN /usr/local/php/bin/phpize
+# RUN ./configure --with-php-config=/usr/local/php/bin/php-config 
+# RUN make && make install
+#安装swoole扩展
+ADD  swoole-4.5.2.tgz /tmp/
+# RUN cd /tmp/swoole-4.5.2
+# RUN /usr/local/php/bin/phpize
+# RUN ./configure --with-php-config=/usr/local/php/bin/php-config 
+# RUN make && make install
 EXPOSE 9000
 CMD ["/usr/local/php/sbin/php-fpm", "--nodaemonize"]
